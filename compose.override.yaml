@@ -28,7 +28,12 @@ services:
       - ./next:/srv/app
     environment:
       WATCHPACK_POLLING: "true"
-
+  
+  ###> doctrine/doctrine-bundle ###
+  database:
+    ports:
+      - "5432"
+  ###< doctrine/doctrine-bundle ###
 
 ###> symfony/mercure-bundle ###
 ###< symfony/mercure-bundle ###
