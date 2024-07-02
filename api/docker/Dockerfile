@@ -3,7 +3,7 @@
 # Versions
 FROM dunglas/frankenphp:1-php8.3 AS frankenphp_upstream
 
-# The different stages of this Dockerfile are meant to be built into separate images
+# The different stages of this docker are meant to be built into separate images
 # https://docs.docker.com/develop/develop-images/multistage-build/#stop-at-a-specific-build-stage
 # https://docs.docker.com/compose/compose-file/#target
 
@@ -81,7 +81,7 @@ RUN set -eux; \
 	composer install --no-cache --prefer-dist --no-dev --no-autoloader --no-scripts --no-progress
 
 # copy sources
-COPY --link . ./
+COPY --link ../.. ./
 RUN rm -Rf frankenphp/
 
 RUN set -eux; \

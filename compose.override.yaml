@@ -2,12 +2,12 @@
 services:
   php:
     build:
-      context: .
+      context: ./api/docker
       target: frankenphp_dev
     volumes:
-      - ./:/app
-      - ./frankenphp/Caddyfile:/etc/caddy/Caddyfile:ro
-      - ./frankenphp/conf.d/app.dev.ini:/usr/local/etc/php/conf.d/app.dev.ini:ro
+      - ./api:/app
+      - ./api/docker/frankenphp/Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./api/docker/frankenphp/conf.d/app.dev.ini:/usr/local/etc/php/conf.d/app.dev.ini:ro
       # If you develop on Mac or Windows you can remove the vendor/ directory
       #  from the bind-mount for better performance by enabling the next line:
       #- /app/vendor
@@ -19,6 +19,16 @@ services:
       # Ensure that host.docker.internal is correctly defined on Linux
       - host.docker.internal:host-gateway
     tty: true
+  
+  next:
+    build:
+      context: next/docker
+      target: dev
+    volumes:
+      - ./next:/srv/app
+    environment:
+      WATCHPACK_POLLING: "true"
+
 
 ###> symfony/mercure-bundle ###
 ###< symfony/mercure-bundle ###
